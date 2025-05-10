@@ -17,6 +17,9 @@ This project implements a comprehensive control framework for a 4-DOF planar man
 
 The system can track arbitrary waypoint-based trajectories while minimizing acceleration, jerk, and control effort.
 
+<img width="743" alt="Screenshot 2025-05-10 at 2 22 15 PM" src="https://github.com/user-attachments/assets/223e1f9b-1878-4837-b21b-c246ecba039b" />
+
+
 ## Repository Structure
 
 - `kinematics.m` - Forward kinematics and Jacobian computation
