@@ -14,7 +14,8 @@ function [K, info] = lqr_controller(A, B, Q, R)
     
     % Compute LQR gain matrix
     [K, S, e] = lqr(A, B, Q, R);
-    
+    disp('K is ')
+    K
     % Return additional information
     info.S = S;  % Solution to Riccati equation
     info.e = e;  % Closed-loop eigenvalues
