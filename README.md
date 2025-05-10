@@ -141,9 +141,9 @@ Where:
 	•	e is the end-effector position error (x_target - x_current).  
 	•	λ is a small positive damping factor (e.g., 1e-6) to avoid singularities.  
 	•	I is the identity matrix sized to match J Jᵀ.  
-To ensume numerical stability and avoid erratic joint motions: the update has a step size limitation:
-if ||Δθ||₂ > Δθ_max:
-    Δθ = (Δθ_max / ||Δθ||₂) * Δθ
+To ensume numerical stability and avoid erratic joint motions: the update has a step size limitation:  
+if ||Δθ||₂ > Δθ_max:  
+    Δθ = (Δθ_max / ||Δθ||₂) * Δθ  
 
 We use a value of 0.5 radians for maximum step size.
 The new joint configuration is updated as :
