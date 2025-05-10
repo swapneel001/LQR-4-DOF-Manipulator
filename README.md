@@ -133,11 +133,24 @@ The system matrices are:
 - D: Zero (no direct feedthrough)
 
 ### Inverse Kinematics
-Uses an iterative approach based on Jacobian linearization and a damped pseudoinverse approach using the Jacobian. A high level gist of this approach is:
-1. Compute forward kinematics and Jacobian at current configuration
-2. Calculate position error
-3. Update joint angles using Jacobian pseudoinverse*position error
-4. Repeat until convergence
+This implementation solves the inverse kinematics (IK) problem using a damped least-squares pseudoinverse approach for improved numerical stability. The update rule is:
+Δθ = Jᵀ (J Jᵀ + λ I)⁻¹ e
+Where:
+	•	Δθ is the joint angle update (column vector),
+	•	J is the Jacobian matrix (task-space derivatives w.r.t. joint angles),
+	•	e is the end-effector position error (x_target - x_current),
+	•	λ is a small positive damping factor (e.g., 1e-6) to avoid singularities,
+	•	I is the identity matrix sized to match J Jᵀ.
+
+To ensume numerical stability and avoid erratic joint motions: the update has a step size limitation:
+if ||Δθ||₂ > Δθ_max:
+    Δθ = (Δθ_max / ||Δθ||₂) * Δθ
+
+We use a value of 0.5 radians for maximum step size.
+The new joint configuration is updated as :
+θ_new = θ_old + Δθ
+
+This works best when the Jacobian is full row rank, i.e it is not underactuated. This method provides a fast and stable update without requiring nonlinear optimization.
 
 ### Trajectory Smoothing
 The smoothing optimization minimizes:
