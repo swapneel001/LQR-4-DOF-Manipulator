@@ -39,7 +39,7 @@ The system can track arbitrary waypoint-based trajectories while minimizing acce
 
 ### Trajectory Generation
 - Waypoint-based planning in task space
-- CVX-based trajectory smoothing (falls back to moving average when CVX is unavailable)
+- CVX-based trajectory smoothing 
 - Optimization for reducing acceleration and jerk
 - Comprehensive comparison between original and smoothed trajectories
 
@@ -59,12 +59,12 @@ The system can track arbitrary waypoint-based trajectories while minimizing acce
 ## Getting Started
 
 ### Prerequisites
-- MATLAB (developed with R2021b)
-- Optional: CVX optimization toolbox for enhanced trajectory smoothing
+- MATLAB (developed with R2024a)
+-  CVX optimization toolbox for enhanced trajectory smoothing
 
 ### Installation
 1. Clone this repository
-2. If you have CVX installed, ensure it's in your MATLAB path for enhanced trajectory smoothing
+2. Install CVX and ensure it's in your MATLAB path for enhanced trajectory smoothing
 
 ### Running the Simulation
 1. Open MATLAB and navigate to the project directory

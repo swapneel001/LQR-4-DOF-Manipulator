@@ -135,28 +135,11 @@ function [times, joint_trajectory] = trajectory_gen(waypoints, total_time, num_p
     original_joint_trajectory = joint_trajectory;
     
     % Apply CVX-based smoothing
-    try
-        % Check if CVX is available
-        if exist('cvx_begin', 'file')
-            fprintf('CVX found, applying CVX-based trajectory smoothing...\n');
-            joint_trajectory = smooth_trajectory_cvx(joint_trajectory, dt);
-        else
-            fprintf('CVX not found, applying moving average smoothing instead...\n');
-            % Fallback to moving average smoothing
-            window_size = max(3, floor(num_points / 50)); % Adaptive window size
-            for j = 1:4
-                joint_trajectory(j,:) = movmean(joint_trajectory(j,:), window_size);
-            end
-        end
-    catch e
-        fprintf('Error in trajectory smoothing: %s\n', e.message);
-        fprintf('Falling back to moving average smoothing...\n');
-        % Fallback to moving average smoothing
-        window_size = max(3, floor(num_points / 50)); % Adaptive window size
-        for j = 1:4
-            joint_trajectory(j,:) = movmean(joint_trajectory(j,:), window_size);
-        end
-    end
+
+    fprintf('CVX trajectory smoothing\n');
+    joint_trajectory = smooth_trajectory_cvx(joint_trajectory, dt);
+
+
     
     % Save original trajectory for analysis
     original_traj = struct();
