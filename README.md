@@ -133,10 +133,10 @@ The system matrices are:
 - D: Zero (no direct feedthrough)
 
 ### Inverse Kinematics
-Uses an iterative approach based on Jacobian linearization:
+Uses an iterative approach based on Jacobian linearization and a damped pseudoinverse approach using the Jacobian. A high level gist of this approach is:
 1. Compute forward kinematics and Jacobian at current configuration
 2. Calculate position error
-3. Update joint angles using pseudoinverse or Jacobian transpose methods
+3. Update joint angles using Jacobian pseudoinverse*position error
 4. Repeat until convergence
 
 ### Trajectory Smoothing
